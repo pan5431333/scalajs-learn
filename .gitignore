@@ -1,8 +1,8 @@
-target
-.idea
-project/project
-project/target
-client/target
-server/target
-shared/.js/target
-shared/.jvm/target
+target/
+.idea/
+project/project/
+project/target/
+client/target/
+server/target/
+shared/.js/target/
+shared/.jvm/target/

@@ -1,14 +1,14 @@
-name := "scalajs-learn"
+import sbt.io.Path.rebase
+import sbtcrossproject.CrossPlugin.autoImport.{CrossType, crossProject}
 
-version := "0.1"
+
+name := "scalajs-learn"
+version := "1.0"
 
 val scalaV = "2.12.6"
 val udashVersion = "0.7.1"
 val udashJQueryVersion = "1.2.0"
 val bootstrapVersion = "3.3.7-1"
-
-import sbt.io.Path.rebase
-import sbtcrossproject.CrossPlugin.autoImport.{CrossType, crossProject}
 
 val shared = (crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure) in file("shared")) // [Pure, Full, Dummy], default: CrossType.Full
@@ -51,6 +51,15 @@ lazy val server = (project in file("server"))
   .settings(libraryDependencies += "io.udash" %% "udash-rpc-backend" % udashVersion)
   .enablePlugins(PlayScala)
   .dependsOn(sharedJvm)
+
+
+// todo if we define root project in this way, then `server/run` command can't be aware of the change of ScalaJS code. 
+// the reason to be discovered later. 
+//lazy val scalaJSLearn = (project in file("."))
+//  .settings(name := "scalajs-learn")
+//  .settings(version := "1.0")
+//  .enablePlugins(JavaAppPackaging)
+//  .aggregate(server, client, sharedJs, sharedJvm)
 
 
 
